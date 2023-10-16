@@ -1,0 +1,139 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  background-image: url("../img/bg.jpg");
+  background-position: left;
+}
+
+i {
+  padding: 5px;
+}
+
+/* ---------------------------------------------- */
+
+.todo-container {
+  background-color: #fff;
+  margin: 30px auto;
+  border-radius: 10px;
+  width: 40%;
+  padding-top: 20px;
+}
+
+.todo-container h1 {
+  color: #8a8a8a;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.todo-container hr {
+  margin: 0 auto;
+  width: 90%;
+  border: none;
+  border: 1px solid #cfcfcf;
+}
+
+.todo-container button {
+  background-color: #fff;
+  border: 2px solid #39516b;
+  color: #39516b;
+  cursor: pointer;
+  transition: 0.5s;
+  text-align: center;
+}
+
+.todo-container button:hover {
+  background-color: #39516b;
+  color: #fff;
+}
+
+/* ---------------------------------------------- */
+
+.add-task,
+.search,
+.tasks,
+.edit-task {
+  padding: 20px 30px;
+}
+
+.add-task p,
+.search p,
+.edit-task p {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.add-task input,
+.edit-task input,
+.search input {
+  padding: 5px;
+}
+
+/* ---------------------------------------------- */
+
+.search {
+  display: flex;
+  justify-content: space-between;
+}
+
+.search select {
+  padding: 5px;
+}
+
+.search-task {
+  margin-right: 40px;
+}
+
+.filter-task {
+  width: 45%;
+}
+
+.filter-task select {
+  width: 80%;
+}
+
+/* ---------------------------------------------- */
+
+.task {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.task p {
+  margin-top: 5px;
+  font-weight: bold;
+}
+
+.task button {
+  margin-right: 5px;
+}
+
+.done {
+  background-color: #39516b;
+  padding: 10px;
+}
+
+.done p {
+  color: #fff;
+  text-decoration: line-through;
+  font-style: italic;
+  font-weight: bold;
+}
+
+/* ---------------------------------------------- */
+
+#btn-cancel {
+  padding: 5px 10px;
+  display: block;
+  margin: 10px 0;
+}
+
+/* ---------------------------------------------- */
+
+.hide {
+  display: none;
+}

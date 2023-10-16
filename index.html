@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo Avançando</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script src="js/scripts.js" defer></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="todo-container">
+        <h1>Todo Avançando</h1>
+        <hr />
+        <div class="add-container">
+          <div class="add-task">
+            <p>Adicione a sua tarefa:</p>
+            <input
+              id="task-name"
+              type="text"
+              placeholder="O que você vai fazer?"
+            />
+            <button id="btn-add"><i class="fa-solid fa-plus"></i></button>
+          </div>
+          <hr />
+          <div class="search">
+            <div class="search-task">
+              <p>Pesquisar:</p>
+              <input id="task-search" type="text" placeholder="Buscar" />
+              <button id="btn-clear">
+                <i class="fa-solid fa-delete-left"></i>
+              </button>
+            </div>
+            <div class="filter-task">
+              <p>Filtrar:</p>
+              <select name="filter" id="task-filter">
+                <option value="all">Todos</option>
+                <option value="done">Feitos</option>
+                <option value="todo">A fazer</option>
+              </select>
+            </div>
+          </div>
+          <hr />
+          <div class="tasks"></div>
+        </div>
+        <div class="edit-container hide">
+          <div class="edit-task">
+            <p>Edite a sua tarefa:</p>
+            <input
+              id="task-edit"
+              type="text"
+              placeholder="O que você vai fazer?"
+            />
+            <button id="btn-edit">
+              <i class="fa-solid fa-check-double"></i>
+            </button>
+            <button id="btn-cancel">Cancelar</button>
+            <hr />
+          </div>
+          <div class="search">
+            <div class="search-task">
+              <p>Pesquisar:</p>
+              <input type="text" placeholder="Buscar" />
+              <button id="btn-clear">
+                <i class="fa-solid fa-delete-left"></i>
+              </button>
+            </div>
+            <div class="filter-task">
+              <p>Filtrar:</p>
+              <select name="filter" id="task-filter">
+                <option value="all">Todos</option>
+                <option value="done">Feitos</option>
+                <option value="todo">A fazer</option>
+              </select>
+            </div>
+          </div>
+          <hr />
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
