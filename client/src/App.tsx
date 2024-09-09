@@ -1,42 +1,62 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Container, FormControl, ItensContainer, Todo } from './app.styles';
 import { FaCheck, FaTrash } from 'react-icons/fa6';
-
-type ItensProps = {
-  _id: number;
-  todo: string;
-  finished: boolean;
-};
+import { createTodo, deleteTodo, getAllTodos, updateTodo } from './api/api';
+import { TodoType } from './api/api-types';
+import { AxiosError } from 'axios';
+import { toast } from 'react-toastify';
 
 function App() {
-  const [itens, setItens] = useState<ItensProps[]>([]);
   const [todo, setTodo] = useState('');
 
-  const handleAddTodo = (todo: string) => {
+  const [todos, setTodos] = useState<TodoType[]>();
+
+  useEffect(() => {
+    const fetchTodos = async () => {
+      const data = await getAllTodos();
+
+      setTodos(data);
+    };
+
+    fetchTodos();
+  }, [todos]);
+
+  const handleAddTodo = async (todoName: string) => {
     if (todo !== '') {
-      setItens((prevState) => [
-        ...prevState,
-        { _id: Math.random(), todo, finished: false },
-      ]);
-      setTodo('');
+      try {
+        await createTodo(todoName);
+        setTodo('');
+        toast.success('Tarefa criada com sucesso.');
+      } catch (err) {
+        const e = err as AxiosError;
+
+        if (e.response?.status === 409) {
+          toast.error('Esta tarefa já existe.');
+        }
+      }
     }
   };
 
-  const handleDeleteTodo = (id: number) => {
-    const todoDeleted = itens.filter((item) => item._id !== id);
-    setItens(todoDeleted);
+  const handleDeleteTodo = async (todoName: string) => {
+    try {
+      await deleteTodo(todoName);
+      toast.success('Tarefa deletada com sucesso.');
+    } catch (err) {
+      toast.error('Algum erro ocorreu...');
+    }
   };
 
-  const handleDoneTodo = (id: number) => {
-    const newTodo = itens.map((item) => {
-      if (item._id === id) {
-        return { ...item, finished: !item.finished };
+  const handleDoneTodo = async (todo: string, finished: boolean) => {
+    try {
+      await updateTodo(todo);
+      if (!finished) {
+        toast.success('Tarefa marcada como concluída.');
+      } else {
+        toast.success('Tarefa marcada como não concluída.');
       }
-
-      return item;
-    });
-
-    setItens(newTodo);
+    } catch (err) {
+      toast.error('Algum erro ocorreu...');
+    }
   };
 
   return (
@@ -58,14 +78,17 @@ function App() {
           <button onClick={() => handleAddTodo(todo)}>Adicionar</button>
         </FormControl>
         <ItensContainer>
-          {itens.length > 0 ? (
-            itens.map((item) => (
+          {todos && todos.length > 0 ? (
+            todos.map((item) => (
               <Todo key={item._id}>
-                <FaCheck id="done" onClick={() => handleDoneTodo(item._id)} />
+                <FaCheck
+                  id="done"
+                  onClick={() => handleDoneTodo(item.todo, item.finished)}
+                />
                 <span className={item.finished ? 'done' : ''}>{item.todo}</span>
                 <FaTrash
                   id="delete"
-                  onClick={() => handleDeleteTodo(item._id)}
+                  onClick={() => handleDeleteTodo(item.todo)}
                 />
               </Todo>
             ))
