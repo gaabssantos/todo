@@ -1,6 +1,6 @@
-import { Request, Response } from 'express';
-import { TodoService } from '../services/todo.service';
-import { StatusCodes } from 'http-status-codes';
+import { Request, Response } from "express";
+import { TodoService } from "../services/todo.service";
+import { StatusCodes } from "http-status-codes";
 
 export class TodoController {
   constructor(private todoService: TodoService) {}
@@ -13,7 +13,7 @@ export class TodoController {
     if (todoFound) {
       return res
         .status(StatusCodes.CONFLICT)
-        .json({ err: 'todo_already_exists' });
+        .json({ err: "todo_already_exists" });
     }
 
     const todoCreated = await this.todoService.create({ todo, finished });
@@ -27,12 +27,29 @@ export class TodoController {
     const todoFound = await this.todoService.findByName(todo);
 
     if (!todoFound) {
-      return res.status(StatusCodes.OK).json({ err: 'todo_not_exists' });
+      return res.status(StatusCodes.OK).json({ err: "todo_not_exists" });
     }
 
     const todoDeleted = await this.todoService.delete(todo);
 
     return res.status(StatusCodes.OK).json(todoDeleted);
+  };
+
+  update = async (req: Request, res: Response) => {
+    const { todo } = req.body;
+
+    const todoFound = await this.todoService.findByName(todo);
+
+    if (!todoFound) {
+      return res.status(StatusCodes.OK).json({ err: "todo_not_exists" });
+    }
+
+    const todoUpdated = await this.todoService.update(
+      todo,
+      !todoFound?.finished
+    );
+
+    return res.status(StatusCodes.OK).json(todoUpdated);
   };
 
   index = async (_: Request, res: Response) => {

@@ -1,5 +1,5 @@
-import { TodoEntity } from '../../entities/todo.entity';
-import { TodoModel } from '../schemas/todo.schema';
+import { TodoEntity } from "../../entities/todo.entity";
+import { TodoModel } from "../schemas/todo.schema";
 
 export class TodoRepository {
   constructor(private todoModel: typeof TodoModel) {}
@@ -22,6 +22,19 @@ export class TodoRepository {
     const todoDeleted = await this.todoModel.findOneAndDelete({ todo });
 
     return todoDeleted?.toObject<TodoEntity>();
+  };
+
+  update = async (
+    todo: string,
+    finished: boolean
+  ): Promise<TodoEntity | undefined> => {
+    const todoUpdated = await this.todoModel.findOneAndUpdate(
+      { todo },
+      { finished },
+      { new: true }
+    );
+
+    return todoUpdated?.toObject<TodoEntity>();
   };
 
   findByName = async (todo: string): Promise<TodoEntity | undefined> => {

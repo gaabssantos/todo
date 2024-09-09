@@ -1,6 +1,6 @@
-import { TodoRepository } from '../database/repositories/todo.repository';
-import { TodoDTO } from '../dtos/todo.dto';
-import { TodoEntity } from '../entities/todo.entity';
+import { TodoRepository } from "../database/repositories/todo.repository";
+import { TodoDTO } from "../dtos/todo.dto";
+import { TodoEntity } from "../entities/todo.entity";
 
 export class TodoService {
   constructor(private todoRepository: TodoRepository) {}
@@ -21,6 +21,12 @@ export class TodoService {
     const todoDeleted = await this.todoRepository.delete(todo);
 
     return todoDeleted;
+  };
+
+  update = async (todo: string, finished: boolean) => {
+    const todoUpdated = await this.todoRepository.update(todo, finished);
+
+    return todoUpdated;
   };
 
   findByName = async (todo: string): Promise<TodoEntity | undefined> => {

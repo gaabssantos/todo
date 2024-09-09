@@ -12,4 +12,5 @@ const todoController = new TodoController(todoService);
 
 todoRoute.post('/', todoController.create);
 todoRoute.get('/', todoController.index);
+todoRoute.put('/', todoController.update);
 todoRoute.delete('/', todoController.delete);
