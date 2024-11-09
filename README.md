@@ -15,6 +15,9 @@
   <li>Axios</li>
   <li>ESLint</li>
   <li>Prettier</li>
+  <li>Node</li>
+  <li>Express</li>
+  <li>MongoDB</li>
 </ul>
 
 <h1>🌐 Deploy</h1>
